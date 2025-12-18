@@ -1,0 +1,13 @@
+const SavePopup=({onClose})=>{
+    return(
+        <div className="popup-overlay">
+            <div className="popup-content">
+                <h2>Note added Successfully!</h2>
+                <button onClick={onClose}>Close</button>
+            </div>
+
+        </div>
+    )
+
+}
+export default SavePopup;
