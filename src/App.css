@@ -83,7 +83,7 @@
         margin-left: 210px;
         position: relative;
         background-color: #fffafa;
-        min-height: 100vh;
+        min-height: 105vh;
     }
     
     .home-page h2 {
@@ -96,10 +96,9 @@
     .sticky-footer {
         position: fixed;
         cursor: pointer;
-        margin: 0 auto 30px auto;
+        margin: 0 15px 8px 0;
         width: 100%;
-        max-width: 520px;
-        left: 0;
+        max-width: 300px;
         right: 0;
         bottom: 0;
         padding: 12px 20px;
@@ -153,6 +152,22 @@
     
     .delete:hover {
         background-color: #991b1b;
+    }
+    
+    .search-bar {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px 12px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        outline: none;
+        transition: border 0.2s;
+    }
+    
+    .search-bar:focus {
+        border-color: #2563eb;
     }
     /* Notes Container */
     

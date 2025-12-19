@@ -10,6 +10,7 @@ const EditNote = () => {
     const {id}=useParams();
     const notes=JSON.parse(localStorage.getItem("notes"))||[];
     const note=notes.find((n)=>n.id===id);
+    
     if(!note){
         return <div className="edit-note">
             <h2>Note not found</h2>
@@ -31,13 +32,9 @@ const EditNote = () => {
             localStorage.setItem("notes",JSON.stringify(updatedNotes));
             setUpdatePopup(true);
     }
-     
-    
-    
     return(
         <div className="edit-note">
             <h2>Edit Note</h2>
-            
             <form autoComplete="off"  onSubmit={handleEdit}>
                 <p>Title</p>
                 <input type="text"
