@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import DeletePopup from "../components/Deletepopup";
-
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
   const [deletePopup, setDeletePopup] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [searchText, setSearchText] = useState("");
-
+  const [sortType,setSortType]=useState({key:"date",order:"desc"});
   useEffect(() => {
     const storedNotes = localStorage.getItem("notes");
     if (storedNotes) {
@@ -23,11 +22,17 @@ const Home = () => {
       note.content.toLowerCase().includes(q)
     );
   });
-
+  const sortedNotes=[...filteredNotes].sort((a,b)=>{
+    if(sortType.key==="date"){
+      const dateA=new Date(a.date);
+      const dateB=new Date(b.date);
+      return sortType.order==="asc" ? dateA - dateB : dateB - dateA;
+    }
+    return 0;
+  });
   const nav = () => {
     navigate("/add");
   };
-
   const Cancel = () => {
     setDeletePopup(false);
   }
@@ -36,7 +41,6 @@ const Home = () => {
     setSelectedId(id);
     setDeletePopup(true);
   };
-
   const confirmDelete = () => {
     const updatedNotes = notes.filter(note => note.id !== selectedId);
     setNotes(updatedNotes);
@@ -46,23 +50,33 @@ const Home = () => {
   return (
     <div className="home-page">
       <h2>My Note </h2>
-
       <input
         type="text"
-        img="https://img.icons8.com/office/40/search--v1.png"
         className="search-bar"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         placeholder="🔍Search notes  by title or content..."
       />
+      <select
+        className="sort-select"
+        value={`${sortType.key}-${sortType.order}`}
+        onChange={(e)=>{
+          const [key,order]=e.target.value.split("-");
+          setSortType({key,order});
+        }}
+      >
+        <option value="date-desc">Sort by Date: Newest First</option>
+        <option value="date-asc">Sort by Date: Oldest First</option>
+      </select>
+
       <div className="card">
         {notes.length === 0 ? (
           <p>You don’t have any notes yet. Click ‘Add Note’ to get started.</p>
         ) : (
-          filteredNotes.length === 0 ? (
+          sortedNotes.length === 0 ? (
             <div className="empty">🔍No matching notes found.</div>
           ) : (
-            filteredNotes.map((note) => (
+            sortedNotes.map((note) => (
               <div className="note-card" key={note.id}>
                 <h4>{note.title}</h4>
                 <p>{note.content}<strong>.</strong></p>
@@ -91,5 +105,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
