@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import DeletePopup from "../components/Deletepopup";
+import pinned from '../assets/pinned.png';
+import unpinned from '../assets/unpinned.png';
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
@@ -24,10 +26,13 @@ const Home = () => {
     );
   });
   const sortedNotes=[...filteredNotes].sort((a,b)=>{
-    if(sortType.key==="date"){
-      const dateA=new Date(a.date);
-      const dateB=new Date(b.date);
-      return sortType.order==="asc" ? dateA - dateB : dateB - dateA;
+    // Show pinned notes first
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    if (sortType.key === "date") {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return sortType.order === "asc" ? dateA - dateB : dateB - dateA;
     }
     return 0;
   });
@@ -74,6 +79,7 @@ const Home = () => {
       
 
       <div className="card">
+
         {notes.length === 0 ? (
           <p>You don’t have any notes yet. Click ‘Add Note’ to get started.</p>
         ) : (
@@ -82,9 +88,24 @@ const Home = () => {
           ) : (
             sortedNotes.map((note) => (
               <div className="note-card" key={note.id}>
+                      
+
                 <h4>{note.title}</h4>
                 <p>{note.content}<strong>.</strong></p>
                 <small>📅{note.date}</small>
+                <button className="pinned" 
+                  onClick={()=>{
+                    const updatedNotes=notes.map(n=>{
+                      
+                      if(n.id===note.id){
+                        return{...n,pinned:!n.pinned};
+                      } return n;
+                    });
+                    setNotes(updatedNotes);
+                    localStorage.setItem("notes",JSON.stringify(updatedNotes));
+                  }}>
+                  <img src={note.pinned ? unpinned : pinned} alt="pinned" />
+                  </button>
                 <div className="btn">
                   <button className="edit" onClick={() => navigate(`/edit/${note.id}`)}>✏️
                     Edit

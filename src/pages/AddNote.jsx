@@ -16,6 +16,7 @@ const AddNote=()=>{
             title:title,
             content:content,
             date:date,
+            pinned:false,
         }
         arr.push(obj);
         localStorage.setItem("notes",JSON.stringify(arr));
