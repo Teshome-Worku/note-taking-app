@@ -9,7 +9,6 @@ const Home = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [sortType,setSortType]=useState({key:"date",order:"desc"});
-  const [sortByAlpha,setSortByAlpha]=useState({key:"title",order:"A-Z"});
 
   useEffect(() => {
     const storedNotes = localStorage.getItem("notes");
@@ -32,18 +31,7 @@ const Home = () => {
     }
     return 0;
   });
-  const sortedNotesAlpha=[...sortedNotes].sort((a,b)=>{
-    if(sortByAlpha.key==="title"){
-      const titleA=a.title.toLowerCase();
-      const titleB=b.title.toLowerCase();
-      if(sortByAlpha.order==="A-Z"){
-        return titleA.localeCompare(titleB);
-      } else {
-        return titleB.localeCompare(titleA);
-      }
-    }
-    return 0;
-  });
+ 
 
   const nav = () => {
     navigate("/add");
@@ -83,17 +71,7 @@ const Home = () => {
         <option value="date-desc">Sort by Date: Newest First</option>
         <option value="date-asc">Sort by Date: Oldest First</option>
       </select>
-      <select
-        className="sort-select"
-        value={`${sortByAlpha.key}-${sortByAlpha.order}`}
-        onChange={(e)=>{
-          const [key,order]=e.target.value.split("-");
-          setSortByAlpha({key,order});
-        }}
-      >
-        <option value="title-A-Z">Sort by Title: A-Z</option>
-        <option value="title-Z-A">Sort by Title: Z-A</option>
-      </select>
+      
 
       <div className="card">
         {notes.length === 0 ? (

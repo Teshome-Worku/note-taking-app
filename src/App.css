@@ -137,7 +137,7 @@
     }
     
     .edit:hover {
-        background-color: #002871e4;
+        background-color: #1d4ed8;
     }
     
     .delete {
@@ -151,7 +151,7 @@
     }
     
     .delete:hover {
-        background-color: #991b1b;
+        background-color: #c62121;
     }
     
     .search-bar {
@@ -204,9 +204,10 @@
     }
     
     .note-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-        border-bottom: 1px solid #28a745;
+        border-left: 1px solid #28a745;
+        border-right: 1px solid #28a745;
     }
     /* Note Title */
     
