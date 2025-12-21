@@ -1,6 +1,6 @@
 {
     "name": "Smart Notes Taking App 📝",
-    "short_name": "Smart Notes",
+    "short_name": "Smart Note App",
     "description": "A simple and efficient note-taking application",
     "start_url": "/",
     "display": "standalone",
