@@ -1,645 +1,688 @@
-    body {
-        margin: 0;
-        padding: 0;
-        color: #111;
-        background-color: #fff;
-        font-family: Tahoma, Geneva, Verdana, sans-serif;
+body {
+    margin: 0;
+    padding: 0;
+    color: #111;
+    background-color: #fff;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.sidebar {
+    margin: 0;
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+    padding: 28px 18px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in;
+    z-index: 2000;
+}
+
+.sidebar a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: background 0.18s, transform 0.12s;
+}
+
+.sidebar a:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(2px);
+}
+
+.sidebar h2 {
+    color: #e809bf;
+    font-size: 1.6rem;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.6px;
+}
+
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.98);
+    border: none;
+    color: #111827;
+    z-index: 2000;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.18);
+    transition: transform 0.18s ease-in, left 0.27s ease-in, background 0.3s ease-in, color 0.3s ease-in;
+}
+
+.hamburger.is-open {
+    left: 210px;
+    background: #111827;
+    color: #fff;
+    z-index: 1400;
+}
+
+.home-page {
+    padding: 20px;
+    margin: auto;
+    margin-left: 210px;
+    position: relative;
+    background-color: #fffafa;
+    min-height: 105vh;
+}
+
+.home-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1f2937;
+    font-size: 28px;
+}
+
+.sticky-footer {
+    position: fixed;
+    cursor: pointer;
+    margin: 0 15px 8px 0;
+    width: 100%;
+    max-width: 300px;
+    right: 0;
+    bottom: 0;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    background: #2563eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+    transition: 0.3s ease;
+}
+
+.sticky-footer:hover {
+    background: #1d4ed8;
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.edit {
+    background: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.edit:hover {
+    background-color: #1d4ed8;
+}
+
+.delete {
+    background-color: #dc2626;
+    color: #ffff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.delete:hover {
+    background-color: #c62121;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.search-bar:focus {
+    border-color: #2563eb;
+}
+
+.sort-select {
+    width: 100%;
+    max-width: 210px;
+    padding: 10px 12px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.sort-select:focus {
+    border-color: #2563eb;
+}
+
+
+/* pinned messages */
+
+.pinned-msg {
+    font-size: 13px;
+    color: #28a745;
+    margin-bottom: 6px;
+}
+
+
+/* Notes Container */
+
+.card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+
+/* Single Note Card */
+
+.note-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    border-left: 1px solid #28a745;
+    border-right: 1px solid #28a745;
+}
+
+
+/* Note Title */
+
+.note-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #111827;
+    text-align: center;
+}
+
+
+/* Note Content */
+
+.note-card p {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
+/* Date */
+
+.note-card small {
+    font-size: 12px;
+    color: #6b7280;
+    right: 0;
+}
+
+.card p {
+    font-style: italic;
+    color: #6b7280;
+}
+
+
+/* Add Note Page */
+
+.add-note {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    background: #f4f6f8;
+    padding: 20px;
+    padding-top: 30px;
+}
+
+.add-note h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+    width: 100%;
+    display: block;
+    max-width: 450px;
+}
+
+.add-note p {
+    margin: 6px 0 2px;
+    font-size: 14px;
+    color: #555;
+}
+
+.pinned {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    transition: transform 0.2s ease;
+}
+
+.note-card.pinned-note {
+    border: 1px solid #facc15;
+    background: #fffbea;
+}
+
+.pinned img {
+    width: 20px;
+    height: auto;
+    display: block;
+}
+
+
+/* Form container */
+
+.input-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.input-field:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+
+/* Form layout */
+
+.input-field form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Inputs & textarea */
+
+.input-field input,
+.input-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    border-color: #2563eb;
+}
+
+
+/* Textarea */
+
+.input-field textarea {
+    resize: none;
+}
+
+
+/* Save button */
+
+.input-field button {
+    padding: 12px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.input-field button:hover {
+    background: #1e40af;
+}
+
+
+/* Popup */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    /* animation: slideIn 0.1s ease-in; */
+    overflow: visible;
+}
+
+
+/* for save and delete popup content */
+
+.popup-content,
+.update-popup,
+.popup-delete {
+    background: white;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: normal;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.popup-delete .cancel,
+.update-popup .update-btn,
+.popup-delete .delete {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    width: 100px;
+    cursor: pointer;
+}
+
+.update-popup .update-btn {
+    background-color: #28a745;
+}
+
+.update-popup .update-btn:hover {
+    background-color: #1c7e39;
+    transition: background-color 0.3s ease-in;
+}
+
+.popup-delete .cancel {
+    background-color: #006bff;
+}
+
+.popup-delete .cancel:hover {
+    background-color: #004bb5;
+    transition: background-color 0.3s ease-in;
+}
+
+.popup-delete .delete {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+.popup-delete .delete:hover {
+    background-color: #b30000;
+    transition: background-color 0.3s ease-in;
+}
+
+.popup-content button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    width: 100px;
+    cursor: pointer;
+    background-color: #28a745;
+}
+
+.popup-content button:hover {
+    background-color: #1c7e39;
+    transition: background-color 0.3s ease-in;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
     }
-    
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
+    to {
+        transform: translateY(0);
     }
-    
-    .sidebar {
-        margin: 0;
-        width: 220px;
-        height: 100vh;
-        background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
-        padding: 28px 18px;
-        position: fixed;
-        left: 0;
-        top: 0;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease-in;
-        z-index: 2000;
-    }
-    
-    .sidebar a {
-        color: rgba(255, 255, 255, 0.95);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        border-radius: 8px;
-        transition: background 0.18s, transform 0.12s;
-    }
-    
-    .sidebar a:hover {
-        background: rgba(255, 255, 255, 0.04);
-        transform: translateX(2px);
-    }
-    
-    .sidebar h2 {
-        color: #e809bf;
-        font-size: 1.6rem;
-        margin: 0 0 8px 0;
-        letter-spacing: 0.6px;
-    }
-    
-    .hamburger {
-        display: none;
-        position: fixed;
-        top: 14px;
-        left: 14px;
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        font-size: 20px;
-        background: rgba(255, 255, 255, 0.98);
-        border: none;
-        color: #111827;
-        z-index: 2000;
-        cursor: pointer;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.18);
-        transition: transform 0.18s ease-in, left 0.27s ease-in, background 0.3s ease-in, color 0.3s ease-in;
-    }
-    
-    .hamburger.is-open {
-        left: 210px;
-        background: #111827;
-        color: #fff;
-        z-index: 1400;
-    }
-    
+}
+
+
+/* overlay when sidebar is open */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* edit note page styles */
+
+.edit-note {
+    min-height: 100vh;
+    background: #f5f7fb;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    padding-top: 20px;
+    flex-direction: column;
+    margin-left: 210px;
+    gap: 20px;
+}
+
+.edit-note form {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-note h2 {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.edit-note p {
+    margin: 6px 0 2px;
+    font-size: 14px;
+    color: #555;
+}
+
+.edit-note input,
+.edit-note textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.edit-note input:focus,
+.edit-note textarea:focus {
+    border-color: #6366f1;
+}
+
+.edit-note textarea {
+    resize: none;
+}
+
+.edit-note button {
+    margin-top: 12px;
+    padding: 12px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-note button:hover {
+    background: #4f46e5;
+}
+
+@media (max-width: 480px) {
     .home-page {
-        padding: 20px;
-        margin: auto;
-        margin-left: 210px;
-        position: relative;
-        background-color: #fffafa;
-        min-height: 105vh;
-    }
-    
-    .home-page h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #1f2937;
-        font-size: 28px;
-    }
-    
-    .sticky-footer {
-        position: fixed;
-        cursor: pointer;
-        margin: 0 15px 8px 0;
-        width: 100%;
-        max-width: 300px;
-        right: 0;
-        bottom: 0;
-        padding: 12px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 12px;
-        color: #fff;
-        background: #2563eb;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.06);
-        z-index: 1000;
-        transition: 0.3s ease;
-    }
-    
-    .sticky-footer:hover {
-        background: #1d4ed8;
-    }
-    
-    .btn {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        gap: 10px;
-        margin-top: 5px;
-    }
-    
-    .edit {
-        background: #007bff;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        border: none;
-        transition: background 0.3s ease;
-    }
-    
-    .edit:hover {
-        background-color: #1d4ed8;
-    }
-    
-    .delete {
-        background-color: #dc2626;
-        color: #ffff;
-        padding: 6px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        border: none;
-        transition: background 0.3s ease;
-    }
-    
-    .delete:hover {
-        background-color: #c62121;
-    }
-    
-    .search-bar {
-        width: 100%;
-        max-width: 400px;
-        padding: 10px 12px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        outline: none;
-        transition: border 0.2s;
-    }
-    
-    .search-bar:focus {
-        border-color: #2563eb;
-    }
-    
-    .sort-select {
-        width: 100%;
-        max-width: 210px;
-        padding: 10px 12px;
-        margin-left: 5px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        outline: none;
-        transition: border 0.2s;
-    }
-    
-    .sort-select:focus {
-        border-color: #2563eb;
-    }
-    /* Notes Container */
-    
-    .card {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 20px;
-    }
-    /* Single Note Card */
-    
-    .note-card {
-        background: white;
         padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        position: relative;
+        align-items: start;
+        margin-left: 0 !important;
     }
-    
-    .note-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-        border-left: 1px solid #28a745;
-        border-right: 1px solid #28a745;
+    .home-page h2 {
+        font-size: 22px;
     }
-    /* Note Title */
-    
-    .note-card h4 {
-        margin: 0 0 10px 0;
-        font-size: 18px;
-        color: #111827;
-        text-align: center;
-    }
-    /* Note Content */
-    
-    .note-card p {
-        font-size: 14px;
-        color: #374151;
-        line-height: 1.5;
-        margin-bottom: 12px;
-        word-wrap: break-word;
-        word-break: break-all;
-    }
-    /* Date */
-    
-    .note-card small {
-        font-size: 12px;
-        color: #6b7280;
-        right: 0;
-    }
-    
-    .card p {
-        font-style: italic;
-        color: #6b7280;
-    }
-    /* Add Note Page */
-    
-    .add-note {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        justify-content: flex-start;
-        align-items: center;
-        background: #f4f6f8;
-        padding: 20px;
-        padding-top: 30px;
-    }
-    
-    .add-note h1 {
-        text-align: center;
-        margin-bottom: 15px;
-        color: #333;
+    .home-page button {
         width: 100%;
-        display: block;
-        max-width: 450px;
-        /* margin-top: 10%; */
+        font-size: 15px;
     }
-    
-    .add-note p {
-        margin: 6px 0 2px;
-        font-size: 14px;
-        color: #555;
-    }
-    /* pinned button */
-    
-    .pinned {
-        background-color: transparent;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 5;
-    }
-    
-    .pinned img {
-        width: 20px;
-        height: auto;
-        display: block;
-    }
-    /* Form container */
-    
-    .input-field {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ffffff;
-        padding: 25px;
-        border-radius: 12px;
-        width: 100%;
-        max-width: 450px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    
-    .input-field:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        cursor: pointer;
-    }
-    /* Form layout */
-    
-    .input-field form {
-        display: flex;
-        flex-direction: column;
+    .card {
+        grid-template-columns: 1fr;
         gap: 10px;
     }
-    /* Inputs & textarea */
-    
+    .input-field {
+        padding: 16px;
+        max-width: 420px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
     .input-field input,
     .input-field textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px;
-        font-size: 15px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        outline: none;
-        transition: border 0.2s ease;
+        font-size: 14px;
+        padding: 10px;
     }
-    
-    .input-field input:focus,
-    .input-field textarea:focus {
-        border-color: #2563eb;
+    .input-field:hover {
+        cursor: default;
     }
-    /* Textarea */
-    
-    .input-field textarea {
-        resize: none;
-    }
-    /* Save button */
-    
     .input-field button {
-        padding: 12px;
-        background: #2563eb;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-    
-    .input-field button:hover {
-        background: #1e40af;
-    }
-    /* Popup */
-    
-    .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-        /* animation: slideIn 0.1s ease-in; */
-        overflow: visible;
-    }
-    /* for save and delete popup content */
-    
-    .popup-content,
-    .update-popup,
-    .popup-delete {
-        background: white;
-        padding: 20px;
-        max-width: 400px;
-        width: 100%;
-        word-wrap: break-word;
-        word-break: normal;
-        border-radius: 5px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-    
-    .popup-delete .cancel,
-    .update-popup .update-btn,
-    .popup-delete .delete {
+        font-size: 15px;
         padding: 10px;
-        border: none;
-        border-radius: 6px;
-        color: #fff;
-        width: 100px;
-        cursor: pointer;
-    }
-    
-    .update-popup .update-btn {
-        background-color: #28a745;
-    }
-    
-    .update-popup .update-btn:hover {
-        background-color: #1c7e39;
-        transition: background-color 0.3s ease-in;
-    }
-    
-    .popup-delete .cancel {
-        background-color: #006bff;
-    }
-    
-    .popup-delete .cancel:hover {
-        background-color: #004bb5;
-        transition: background-color 0.3s ease-in;
-    }
-    
-    .popup-delete .delete {
-        background-color: rgba(255, 0, 0, 0.7);
-    }
-    
-    .popup-delete .delete:hover {
-        background-color: #b30000;
-        transition: background-color 0.3s ease-in;
-    }
-    
-    .popup-content button {
-        padding: 10px;
-        border: none;
-        border-radius: 6px;
-        color: #fff;
-        width: 100px;
-        cursor: pointer;
-        background-color: #28a745;
-    }
-    
-    .popup-content button:hover {
-        background-color: #1c7e39;
-        transition: background-color 0.3s ease-in;
-    }
-    
-    @keyframes slideIn {
-        from {
-            transform: translateY(100%);
-        }
-        to {
-            transform: translateY(0);
-        }
-    }
-    /* overlay when sidebar is open */
-    
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1100;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    
-    .overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    /* edit note page styles */
-    
-    .edit-note {
-        min-height: 100vh;
-        background: #f5f7fb;
-        display: flex;
-        justify-content: flex-start;
+    .add-note {
+        padding: 15px;
         align-items: center;
-        padding: 20px;
-        padding-top: 20px;
-        flex-direction: column;
-        margin-left: 210px;
-        gap: 20px;
     }
-    
-    .edit-note form {
-        background: #ffffff;
-        width: 100%;
-        max-width: 500px;
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .edit-note h2 {
-        display: block;
-        max-width: 500px;
-        width: 100%;
+    .add-note h1 {
+        font-size: 20px;
         text-align: center;
         margin-bottom: 12px;
-        color: #333;
+        max-width: 100%;
     }
-    
-    .edit-note p {
-        margin: 6px 0 2px;
-        font-size: 14px;
-        color: #555;
+    .note-card {
+        padding-top: 30px;
     }
-    
-    .edit-note input,
-    .edit-note textarea {
-        padding: 10px 12px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        outline: none;
-        transition: border 0.2s;
+    .pinned img {
+        width: 18px;
+        top: 10px;
+        right: 10px;
+        position: absolute;
     }
-    
-    .edit-note input:focus,
-    .edit-note textarea:focus {
-        border-color: #6366f1;
+    .note-card h4 {
+        font-size: 16px;
     }
-    
-    .edit-note textarea {
-        resize: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%) !important;
+        left: 0;
+        top: 0;
+        position: fixed;
+        z-index: 1200;
+        width: 260px;
+        max-width: 80%;
     }
-    
-    .edit-note button {
-        margin-top: 12px;
-        padding: 12px;
-        background: #6366f1;
-        color: #fff;
-        border: none;
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+    .home-page {
+        margin-left: 0 !important;
+    }
+    .hamburger {
+        display: flex !important;
+    }
+    .card {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .popup-content,
+    .popup-delete,
+    .update-popup {
+        max-width: 90%;
+        width: 100%;
+        padding: 15px;
         border-radius: 10px;
-        font-size: 15px;
-        cursor: pointer;
-        transition: background 0.2s;
     }
-    
-    .edit-note button:hover {
-        background: #4f46e5;
+    .sticky-footer {
+        max-width: 90%;
+        width: fit-content;
+        padding: 10px;
+        font-size: 14px;
     }
-    
-    @media (max-width: 480px) {
-        .home-page {
-            padding: 15px;
-            align-items: start;
-            margin-left: 0 !important;
-        }
-        .home-page h2 {
-            font-size: 22px;
-        }
-        .home-page button {
-            width: 100%;
-            font-size: 15px;
-        }
-        .card {
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        .input-field {
-            padding: 16px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-        .input-field input,
-        .input-field textarea {
-            font-size: 14px;
-            padding: 10px;
-        }
-        .input-field:hover {
-            cursor: default;
-        }
-        .input-field button {
-            font-size: 15px;
-            padding: 10px;
-            width: 100%;
-        }
-        .add-note {
-            padding: 15px;
-            align-items: center;
-        }
-        .add-note h1 {
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 12px;
-            max-width: 100%;
-        }
-        .note-card {
-            padding-top: 30px;
-        }
-        .pinned img {
-            width: 18px;
-            top: 10px;
-            right: 10px;
-            position: absolute;
-        }
-        .note-card h4 {
-            font-size: 16px;
-        }
+    .edit-note {
+        margin-left: 0 !important;
     }
-    
-    @media (max-width: 768px) {
-        .sidebar {
-            transform: translateX(-100%) !important;
-            left: 0;
-            top: 0;
-            position: fixed;
-            z-index: 1200;
-            width: 260px;
-            max-width: 80%;
-        }
-        .sidebar.open {
-            transform: translateX(0) !important;
-        }
-        .home-page {
-            margin-left: 0 !important;
-        }
-        .hamburger {
-            display: flex !important;
-        }
-        .card {
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-        .popup-content,
-        .popup-delete,
-        .update-popup {
-            max-width: 90%;
-            width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .sticky-footer {
-            max-width: 90%;
-            width: fit-content;
-            padding: 10px;
-            font-size: 14px;
-        }
-        .edit-note {
-            margin-left: 0 !important;
-        }
-    }
+}

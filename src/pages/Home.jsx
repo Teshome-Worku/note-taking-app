@@ -26,7 +26,6 @@ const Home = () => {
     );
   });
   const sortedNotes=[...filteredNotes].sort((a,b)=>{
-    // Show pinned notes first
     if (a.pinned && !b.pinned) return -1;
     if (!a.pinned && b.pinned) return 1;
     if (sortType.key === "date") {
@@ -36,6 +35,8 @@ const Home = () => {
     }
     return 0;
   });
+  const hasPinnedNotes = notes.some(note => note.pinned);
+
  
 
   const nav = () => {
@@ -76,7 +77,10 @@ const Home = () => {
         <option value="date-desc">Sort by Date: Newest First</option>
         <option value="date-asc">Sort by Date: Oldest First</option>
       </select>
-      
+      {hasPinnedNotes && (
+        <p className="pinned-msg">📌 Pinned notes always appear on top</p>
+      )}
+            
 
       <div className="card">
 
@@ -87,13 +91,13 @@ const Home = () => {
             <div className="empty">🔍No matching notes found.</div>
           ) : (
             sortedNotes.map((note) => (
-              <div className="note-card" key={note.id}>
-                      
-
+              <div className={`note-card ${note.pinned ? "pinned-note" : ""}`} key={note.id}>
                 <h4>{note.title}</h4>
+
                 <p>{note.content}<strong>.</strong></p>
                 <small>📅{note.date}</small>
                 <button className="pinned" 
+                 title={note.pinned ? "Unpin note" : "Pin note"}
                   onClick={()=>{
                     const updatedNotes=notes.map(n=>{
                       
