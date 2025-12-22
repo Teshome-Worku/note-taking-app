@@ -20,7 +20,7 @@ export default defineConfig({
                 description: "A simple and efficient note-taking application",
                 start_url: "/",
                 display: "standalone",
-                background_color: "#f0f4f8",
+                background_color: "#333",
                 theme_color: "#4f46e5",
                 icons: [{
                         src: "/icons/icon-192.png",
