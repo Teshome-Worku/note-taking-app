@@ -344,6 +344,16 @@ body {
 }
 
 
+/* error  */
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -6px;
+    margin-bottom: 6px;
+}
+
+
 /* Inputs & textarea */
 
 .input-field input,
