@@ -579,7 +579,7 @@ body {
     resize: none;
 }
 
-.edit-note button {
+.edit-note .save-btn {
     margin-top: 12px;
     padding: 12px;
     background: #6366f1;
@@ -591,8 +591,44 @@ body {
     transition: background 0.2s;
 }
 
-.edit-note button:hover {
+.edit-note .save-btn:hover {
     background: #4f46e5;
+}
+
+.edit-note .back-btn {
+    margin-top: 8px;
+    padding: 10px;
+    background: #9ca3af;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-note .back-btn:hover {
+    background: #6b7280;
+}
+
+.back {
+    position: fixed;
+    top: auto;
+    left: 400px;
+    bottom: 20px;
+    z-index: 2001;
+}
+
+.previous-icon {
+    width: 45px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.previous-icon:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
 }
 
 @media (max-width: 480px) {
@@ -694,5 +730,16 @@ body {
     }
     .edit-note {
         margin-left: 0 !important;
+    }
+    .back {
+        left: 16px;
+        bottom: 18px;
+        position: fixed;
+        top: auto;
+        z-index: 2001;
+    }
+    .previous-icon {
+        width: 40px;
+        height: 40px;
     }
 }

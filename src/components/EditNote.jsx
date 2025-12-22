@@ -1,6 +1,7 @@
 import { useNavigate,useParams } from "react-router-dom";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UpdatePopup from "./UpdatePopup";
+import previous from '../assets/previous.png';
 const EditNote = () => {
     const navigate=useNavigate();
     const [title,setTitle]=useState("");
@@ -58,9 +59,13 @@ const EditNote = () => {
                     value={date} 
                     required
                     onChange={(e)=>setDate(e.target.value)}/>
-                <button type="submit">Save Changes</button>
-
+                <button className="save-btn" type="submit">Save Changes</button>
             </form>
+            <div className="back">
+                <img src={previous} alt="previous" className="previous-icon" 
+                onClick={()=>navigate("/")}/>
+            </div>
+            {/* <button className="back-btn" onClick={()=>navigate("/")}>Go back</button> */}
             {updatePopup && <UpdatePopup onClose={closePopup}/>}
            
         </div>
