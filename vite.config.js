@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,7 +11,33 @@ export default defineConfig({
                     ['babel-plugin-react-compiler']
                 ],
             },
-
         }),
-    ],
+        VitePWA({
+            registerType: 'autoUpdate',
+            manifest: {
+                name: "Smart Notes Taking App 📝",
+                short_name: "Smart Note App",
+                description: "A simple and efficient note-taking application",
+                start_url: "/",
+                display: "standalone",
+                background_color: "#f0f4f8",
+                theme_color: "#4f46e5",
+                icons: [{
+                        src: "/icons/icon-192.png",
+                        sizes: "192x192",
+                        type: "image/png"
+                    },
+                    {
+                        src: "/icons/icon-512.png",
+                        sizes: "512x512",
+                        type: "image/png"
+                    }
+                ]
+            },
+            workbox: {
+                // Cache all built assets
+                globPatterns: ['**/*.{js,css,html,png,svg}'],
+            }
+        })
+    ]
 })
