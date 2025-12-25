@@ -4,13 +4,13 @@ import SavePopup from "../components/SavePopup";
 const AddNote=()=>{
     const titleRef=useRef(null);
     const contentRef=useRef(null);
+    const navigate=useNavigate();
 
     const [title,setTitle]=useState("");
     const[content,setContent]=useState("");
     
     const [date,setDate]=useState("");
     const [savePopup,setSavePopup]=useState(false);
-    const navigate=useNavigate();
     const [inCorrectTitle,setIncorrectTitle]=useState("");
     const [inCorrectContent,setIncorrectContent]=useState("");
 

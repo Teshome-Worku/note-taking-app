@@ -9,6 +9,7 @@ const EditNote = () => {
     const [date,setDate]=useState(""); 
     const [updatePopup,setUpdatePopup]=useState(false);     
     const {id}=useParams();
+    
     const notes=JSON.parse(localStorage.getItem("notes"))||[];
     const note=notes.find((n)=>n.id===id);
     
@@ -65,7 +66,6 @@ const EditNote = () => {
                 <img src={previous} alt="previous" className="previous-icon" 
                 onClick={()=>navigate("/")}/>
             </div>
-            {/* <button className="back-btn" onClick={()=>navigate("/")}>Go back</button> */}
             {updatePopup && <UpdatePopup onClose={closePopup}/>}
            
         </div>
