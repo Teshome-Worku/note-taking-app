@@ -443,6 +443,7 @@ body {
     color: #fff;
     width: 100px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in;
 }
 
 .update-popup .update-btn {
@@ -451,7 +452,6 @@ body {
 
 .update-popup .update-btn:hover {
     background-color: #1c7e39;
-    transition: background-color 0.3s ease-in;
 }
 
 .popup-delete .cancel {
@@ -460,7 +460,6 @@ body {
 
 .popup-delete .cancel:hover {
     background-color: #004bb5;
-    transition: background-color 0.3s ease-in;
 }
 
 .popup-delete .delete {
@@ -469,7 +468,6 @@ body {
 
 .popup-delete .delete:hover {
     background-color: #b30000;
-    transition: background-color 0.3s ease-in;
 }
 
 .popup-content button {
