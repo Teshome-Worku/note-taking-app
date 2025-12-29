@@ -11,6 +11,8 @@ const Home = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [sortType,setSortType]=useState({key:"date",order:"desc"});
+  const [expandedId,setExpandedId]=useState(null);
+  const maxWidth=100;
 
   useEffect(() => {
     const storedNotes = localStorage.getItem("notes");
@@ -90,12 +92,35 @@ const Home = () => {
           sortedNotes.length === 0 ? (
             <div className="empty">🔍No matching notes found.</div>
           ) : (
-            sortedNotes.map((note) => (
-              <div className={`note-card ${note.pinned ? "pinned-note" : ""}`} key={note.id}>
+            sortedNotes.map((note) => {
+              const isLong = note.content.length > maxWidth;
+              const isExpanded = expandedId === note.id;
+              return(
+                <div className={`note-card ${note.pinned ? "pinned-note" : ""}`} key={note.id}>
                 <h4>{note.title}</h4>
+                <p className="note-content">
+                    {isExpanded || !isLong
+                      ? `${note.content}.`
+                      : (
+                        <>
+                          {note.content.slice(0, maxWidth)}
+                          <span className="dots">...</span>
+                          
+                        </>)}
+                        {isLong&&(
+                          <button
+                            className="read-more"
+                            onClick={() =>
+                              setExpandedId(isExpanded ? null : note.id)
+                            }
+                          >
+                            {isExpanded? "show less" : "read more"}
+                            
+                          </button>
+                        )}
+                 </p>
 
-                <p>{note.content}<strong>.</strong></p>
-                <small>📅{note.date}</small>
+                <small className="note-date">📅{note.date}</small>
                 <button className="pinned" 
                  title={note.pinned ? "Unpin note" : "Pin note"}
                   onClick={()=>{
@@ -119,7 +144,10 @@ const Home = () => {
                   </button>
                 </div>
               </div>
-            ))
+
+              )
+              
+              })
           )
         )}
       </div>

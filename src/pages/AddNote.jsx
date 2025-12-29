@@ -13,6 +13,7 @@ const AddNote=()=>{
     const [savePopup,setSavePopup]=useState(false);
     const [inCorrectTitle,setIncorrectTitle]=useState("");
     const [inCorrectContent,setIncorrectContent]=useState("");
+    
 
 
     const addNote=(e)=>{

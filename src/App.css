@@ -629,6 +629,37 @@ body {
     transition: transform 0.2s ease;
 }
 
+.note-content {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.note-content .dots {
+    margin-right: 4px;
+}
+
+.read-more {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.note-date {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #777;
+}
+
 @media (max-width: 480px) {
     .home-page {
         padding: 15px;
