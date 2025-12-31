@@ -96,7 +96,7 @@ body {
 .sticky-footer {
     position: fixed;
     cursor: pointer;
-    margin: 0 15px 8px 0;
+    margin: 0 0 0 0;
     width: 100%;
     max-width: 300px;
     right: 0;
