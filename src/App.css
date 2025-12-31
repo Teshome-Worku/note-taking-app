@@ -83,7 +83,7 @@ body {
     margin-left: 210px;
     position: relative;
     background-color: #fffafa;
-    min-height: 150vh;
+    min-height: 120vh;
 }
 
 .home-page h2 {
@@ -96,7 +96,7 @@ body {
 .sticky-footer {
     position: fixed;
     cursor: pointer;
-    margin: 0 0 0 0;
+    margin: 0 0 8px 0;
     width: 100%;
     max-width: 300px;
     right: 0;
